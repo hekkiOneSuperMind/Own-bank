@@ -16,16 +16,16 @@
     -fx-background-color: white;
 }
 
-#buttonProceed{
+#buttonProceed, #buttonSignIn{
     -fx-background-color: #24c9ff;
 }
 
-#buttonRegister{
+#buttonRegister, #completeBtn{
     -fx-background-color: #e90052;
     -fx-fill: white;
 }
 
-#forgotPassword, #backBtnLink{
+#forgotPassword, #backBtnLink, #returnBtnLink{
     -fx-font-size: 15px;
 }
 
@@ -33,7 +33,12 @@
     -fx-fill: #37134f;
 }
 
-.registerPage{
+.registerPage, .registerPage1{
     -fx-background-color: white;
     -fx-fill: white;
+}
+
+.disclaimer{
+    -fx-font-size: 12px;
+    -fx-fill: #37134f;
 }
