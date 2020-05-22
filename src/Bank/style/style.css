@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.mainBorderPane{
+    -fx-background-color: grey;
+    -fx-font-family: 'Roboto', sans-serif;
+    -fx-font-size: 24px;
+    -fx-font-weight: Bold;
+}
+
+.leftPane{
+    -fx-background-color: #37134f;
+    -fx-fill: white;
+}
+
+.centerPane{
+    -fx-background-color: white;
+}
+
+#buttonProceed{
+    -fx-background-color: #24c9ff;
+}
+
+#buttonRegister{
+    -fx-background-color: #e90052;
+    -fx-fill: white;
+}
+
+#forgotPassword, #backBtnLink{
+    -fx-font-size: 15px;
+}
+
+.signInText{
+    -fx-fill: #37134f;
+}
+
+.registerPage{
+    -fx-background-color: white;
+    -fx-fill: white;
+}
