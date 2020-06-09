@@ -1,17 +1,19 @@
 package Bank;
 
+import Bank.user.User;
+import Bank.user.UserDAO;
+import Bank.validations.EmptySpace;
+import Bank.validations.PassportDetailInputValidator;
+import Bank.validations.PersonalDetailInputValidation;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Hyperlink;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import java.awt.event.KeyEvent;
-import java.net.URL;
-import java.util.ResourceBundle;
+
+import java.sql.SQLException;
 
 public class Controller {
 
@@ -49,7 +51,19 @@ public class Controller {
     private Text signInText;
 
     @FXML
-    private TextField newUserPassport;
+    private PersonalDetailInputValidation newUserName;
+
+    @FXML
+    private PersonalDetailInputValidation newUserSurName;
+
+    @FXML
+    private PersonalDetailInputValidation newUserCountryResident;
+
+    @FXML
+    private PassportDetailInputValidator newUserPassport;
+
+    @FXML
+    private DatePicker newUserBirthDate;
 
     @FXML
     void backToSignIn(ActionEvent event) {
@@ -58,11 +72,25 @@ public class Controller {
         }
     }
 
-    @FXML
-    void proceedRegistration(ActionEvent event) {
-        if (event.getSource().equals(buttonProceed)){
-            registerPageLast.toFront();
-        }
+    public void proceedRegistration(ActionEvent event) throws SQLException {
+        String f_name = newUserName.getText().trim();
+        String l_name = newUserSurName.getText().trim();
+        String country = newUserCountryResident.getText().trim();
+        String passport = newUserPassport.getText();
+//        String DOB = newUserBirthDate.getValue().toString();
+        User user = this.createUserObject(f_name, l_name,country,passport);
+        int userID = UserDAO.insertInDB(user);
+        registerPageLast.toFront();
+    }
+
+    private User createUserObject(String f_name, String l_name, String country, String passport) {
+        User user = new User();
+        user.setFirstName(f_name);
+        user.setLastName(l_name);
+        user.setCountry(country);
+        user.setPassport(passport);
+
+        return  user;
     }
 
     @FXML
@@ -100,5 +128,6 @@ public class Controller {
             //checks entered data, in case of existing a user there, allows to enter the system, otherwise stays unchanged
         }
     }
+
 
 }
