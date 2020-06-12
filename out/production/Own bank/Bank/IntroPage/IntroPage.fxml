@@ -53,8 +53,8 @@
                   </Pane>
                   <Pane fx:id="signInPage" prefHeight="200.0" prefWidth="200.0" styleClass="centerPane">
                      <children>
-                        <TextField layoutX="28.0" layoutY="159.0" prefHeight="45.0" prefWidth="380.0" promptText="ID" />
-                        <PasswordField layoutX="28.0" layoutY="235.0" prefHeight="45.0" prefWidth="380.0" promptText="Password" />
+                        <TextField fx:id="user_ID" layoutX="28.0" layoutY="159.0" prefHeight="45.0" prefWidth="380.0" promptText="ID" />
+                        <PasswordField fx:id="user_password" layoutX="28.0" layoutY="235.0" prefHeight="45.0" prefWidth="380.0" promptText="Password" />
                         <Button fx:id="buttonSignIn" layoutX="301.0" layoutY="324.0" mnemonicParsing="false" onAction="#signIn" prefHeight="50.0" prefWidth="110.0" text="Sign In" textFill="#fcfcfc" />
                         <Button fx:id="buttonRegister" layoutX="21.0" layoutY="441.0" mnemonicParsing="false" onAction="#registrationProcess" prefHeight="45.0" prefWidth="390.0" text="No account? Register!" textFill="#fcfcfc" />
                         <Hyperlink fx:id="forgotPassword" layoutX="28.0" layoutY="336.0" onAction="#forgotPasswordProcedure" text="Forgot password?" />

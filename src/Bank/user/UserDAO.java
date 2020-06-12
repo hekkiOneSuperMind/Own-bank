@@ -1,7 +1,6 @@
 package Bank.user;
 
 import Bank.database.ConnectionToDB;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,27 +10,26 @@ import java.util.logging.Logger;
 public class UserDAO {
     private static final Logger logger = Logger.getLogger(UserDAO.class.getName());
 
-    public boolean isInDatabase(String passportDetail) throws SQLException{
+    public static void isInDatabase(String passportDetail, String user_password) throws SQLException{
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        List<User> userList = new ArrayList<>();
 
         try{
             connection = ConnectionToDB.getConnToDB();
             connection.setAutoCommit(false);
-            String sql = "SELECT id, passport_detail FROM users WHERE passport_detail = ?";
-            preparedStatement = connection.prepareStatement(sql);
-            int counter = 1;
-            preparedStatement.setString(counter++,passportDetail);
-            resultSet = preparedStatement.executeQuery();
-            User user = new User();
+            preparedStatement = connection.prepareStatement("SELECT passport_detail, password FROM users");
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
             while (resultSet.next()){
-                user.setId(resultSet.getInt(1));
-                user.setPassport(resultSet.getString(4));
-                userList.add(user);
+                String user = resultSet.getString(1);
+                String pass = resultSet.getString(2);
+                if (user.equals(passportDetail) && pass.equals(user_password)){
+                    System.out.println("Success");
+                }
             }
-            return userList.isEmpty()? false:true;
+
+
         }catch (Exception e){
             logger.log(Level.SEVERE,e.getMessage());
         }finally {
@@ -43,7 +41,6 @@ public class UserDAO {
                 connection.close();
             }
         }
-        return userList.isEmpty()? false:true;
     }
 
     public static int insertInDB(User user) throws SQLException{
@@ -54,15 +51,18 @@ public class UserDAO {
         try {
             connection = ConnectionToDB.getConnToDB();
             connection.setAutoCommit(false);
-            String sql = "INSERT INTO users(first_name, last_name, country, passport_detail, date_of_birth)VALUES(?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO users(first_name, last_name, country, passport_detail, date_of_birth, password, phone_number,email_address)VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             int counter = 1;
             preparedStatement.setString(counter++,user.getFirstName());
             preparedStatement.setString(counter++,user.getLastName());
             preparedStatement.setString(counter++,user.getCountry());
             preparedStatement.setString(counter++,user.getPassport());
-            preparedStatement.setString(counter,user.getDOB());
-            counter++;
+            preparedStatement.setString(counter++,user.getDOB());
+            preparedStatement.setString(counter++,user.getPassword());
+            preparedStatement.setString(counter++,user.getPhone_number());
+            preparedStatement.setString(counter,user.getEmail());
+
             preparedStatement.executeUpdate();
             connection.commit();
             resultSet = preparedStatement.getGeneratedKeys();
