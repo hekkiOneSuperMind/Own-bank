@@ -9,7 +9,10 @@
 
 .leftPane{
     -fx-background-color: #37134f;
-    -fx-fill: white;
+}
+
+.leftPaneText{
+    -fx-text-fill: white;
 }
 
 .centerPane{
@@ -18,11 +21,12 @@
 
 #buttonProceed, #buttonSignIn{
     -fx-background-color: #24c9ff;
+    -fx-text-fill: white;
 }
 
 #buttonRegister, #completeBtn{
     -fx-background-color: #e90052;
-    -fx-fill: white;
+    -fx-text-fill: white;
 }
 
 #forgotPassword, #backBtnLink, #returnBtnLink{
@@ -30,15 +34,28 @@
 }
 
 .signInText{
-    -fx-fill: #37134f;
+    -fx-text-fill: #37134f;
 }
 
 .registerPage, .registerPage1{
     -fx-background-color: white;
-    -fx-fill: white;
+    -fx-text-fill: white;
 }
 
 .disclaimer{
     -fx-font-size: 12px;
     -fx-fill: #37134f;
+}
+
+.verificator{
+    -fx-font-size: 18px;
+    -fx-text-fill: #e90052;
+    -fx-pref-width: 396.0;
+    -fx-pref-height: 18.0;
+}
+
+.inputField{
+    -fx-text-fill: #37134f;
+    -fx-pref-width: 395.0;
+    -fx-pref-height: 45.0;
 }
