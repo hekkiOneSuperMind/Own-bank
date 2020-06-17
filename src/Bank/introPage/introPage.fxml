@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,52 +14,64 @@
 
 <?import Bank.validations.PersonalDetailInputValidation?>
 <?import Bank.validations.PassportDetailInputValidator?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="/Bank/style/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Bank.Controller">
+<?import Bank.validations.DigitsInputValidation?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="/Bank/style/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Bank.IntroPageController">
    <children>
       <BorderPane prefHeight="500.0" prefWidth="700.0" styleClass="mainBorderPane">
          <left>
             <Pane prefHeight="400.0" prefWidth="268.0" styleClass="leftPane" BorderPane.alignment="CENTER">
                <children>
-                  <Text fill="WHITE" layoutX="85.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome" />
-                  <Text fill="WHITE" layoutX="119.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AS" />
-                  <Text fill="WHITE" layoutX="35.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bank Management" />
-               </children></Pane>
+                  <Label layoutX="85.0" layoutY="309.0" styleClass="leftPaneText" text="Welcome" />
+                  <Label layoutX="120.0" layoutY="172.0" styleClass="leftPaneText" text="AS" />
+                  <Label layoutX="34.0" layoutY="236.0" styleClass="leftPaneText" text="Bank Management" />
+               </children>
+            </Pane>
          </left>
          <center>
             <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
                   <Pane fx:id="registerPageLast" prefHeight="200.0" prefWidth="200.0" styleClass="registerPage">
                      <children>
-                        <TextField layoutX="19.0" layoutY="71.0" prefHeight="45.0" prefWidth="395.0" promptText="Number" />
-                        <TextField layoutX="19.0" layoutY="142.0" prefHeight="45.0" prefWidth="395.0" promptText="E-mail address" />
-                        <TextField accessibleRole="PASSWORD_FIELD" layoutX="19.0" layoutY="212.0" prefHeight="45.0" prefWidth="395.0" promptText="Create password" />
-                        <TextField accessibleRole="PASSWORD_FIELD" layoutX="19.0" layoutY="283.0" prefHeight="45.0" prefWidth="395.0" promptText="Confirm password" />
-                        <Button fx:id="completeBtn" layoutX="20.0" layoutY="441.0" mnemonicParsing="false" onAction="#completeRegistration" prefHeight="45.0" prefWidth="394.0" text="Complete registration" textFill="WHITE" />
-                        <Hyperlink fx:id="returnBtnLink" layoutX="32.0" layoutY="23.0" onAction="#returnToRegister" text="Return" />
+                        <DigitsInputValidation fx:id="newUserPhone" layoutX="19.0" layoutY="71.0" prefHeight="45.0" prefWidth="395.0" promptText="Number" />
+                        <TextField fx:id="newUserEmail" layoutX="19.0" layoutY="142.0" prefHeight="45.0" prefWidth="395.0" promptText="E-mail address" />
+                        <TextField fx:id="newPassword" accessibleRole="PASSWORD_FIELD" layoutX="19.0" layoutY="212.0" prefHeight="45.0" prefWidth="395.0" promptText="Create password" />
+                        <TextField fx:id="newPasswordConfirmation" accessibleRole="PASSWORD_FIELD" layoutX="19.0" layoutY="283.0" prefHeight="45.0" prefWidth="395.0" promptText="Confirm password" />
+                        <Button fx:id="completeBtn" layoutX="20.0" layoutY="441.0" mnemonicParsing="false" onAction="#completeRegistration" prefHeight="45.0" prefWidth="394.0" text="Complete registration" />
+                        <Hyperlink fx:id="returnBtnLink" layoutX="18.0" layoutY="24.0" onAction="#returnToRegister" text="Return" />
                         <Text layoutX="45.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="disclaimer" text="By using this app and by providing personal information to us on" />
                         <Text layoutX="61.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="disclaimer" text="you consent to the collection, use, transfer and disclosure" wrappingWidth="312.1015625" />
                         <Text layoutX="14.0" layoutY="407.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="disclaimer" text="of that information in accordance with this privacy policy and applicable law." />
+                        <Label fx:id="newPasswordFilledStatusVerificator" layoutX="19.0" layoutY="257.0" styleClass="verificator" />
+                        <Label fx:id="passwordSimilarity" layoutX="18.0" layoutY="328.0" styleClass="verificator" />
                      </children>
                   </Pane>
                   <Pane fx:id="registerPage" prefHeight="200.0" prefWidth="200.0" styleClass="registerPage">
                      <children>
-                        <PersonalDetailInputValidation fx:id="newUserName" layoutX="19.0" layoutY="71.0" prefHeight="45.0" prefWidth="395.0" promptText="Name" />
-                        <PersonalDetailInputValidation fx:id="newUserSurName" layoutX="19.0" layoutY="142.0" prefHeight="45.0" prefWidth="395.0" promptText="Surname" />
-                        <PersonalDetailInputValidation fx:id="newUserCountryResident" layoutX="19.0" layoutY="212.0" prefHeight="45.0" prefWidth="395.0" promptText="Enter country" />
-                        <PassportDetailInputValidator fx:id="newUserPassport" layoutX="19.0" layoutY="283.0" prefHeight="45.0" prefWidth="395.0" promptText="Passport detail" />
-                        <DatePicker fx:id="newUserBirthDate" editable="false" layoutX="19.0" layoutY="351.0" prefHeight="45.0" prefWidth="396.0" promptText="Birth date(dd/mm/yyyy)" />
-                        <Button fx:id="buttonProceed" layoutX="293.0" layoutY="423.0" mnemonicParsing="false" onAction="#proceedRegistration" text="Proceed" textFill="WHITE" />
-                        <Hyperlink fx:id="backBtnLink" layoutX="32.0" layoutY="23.0" onAction="#backToSignIn" text="Back" />
+                        <PersonalDetailInputValidation fx:id="newUserName" layoutX="19.0" layoutY="71.0" promptText="Name" styleClass="inputField" />
+                        <PersonalDetailInputValidation fx:id="newUserSurName" layoutX="19.0" layoutY="142.0" promptText="Surname" styleClass="inputField" />
+                        <PersonalDetailInputValidation fx:id="newUserCountryResident" layoutX="19.0" layoutY="212.0" promptText="Enter country" styleClass="inputField" />
+                        <PassportDetailInputValidator fx:id="newUserPassport" layoutX="19.0" layoutY="283.0" promptText="Passport detail" styleClass="inputField" />
+                        <DatePicker fx:id="newUserBirthDate" editable="false" layoutX="19.0" layoutY="351.0" promptText="Birth date(dd/mm/yyyy)" styleClass="inputField" />
+                        <Button fx:id="buttonProceed" layoutX="293.0" layoutY="423.0" mnemonicParsing="false" onAction="#proceedRegistration" text="Proceed" />
+                        <Hyperlink fx:id="backBtnLink" layoutX="14.0" layoutY="27.0" onAction="#backToSignIn" text="Back" />
+                        <Label fx:id="nameVerificator" layoutX="19.0" layoutY="116.0" styleClass="verificator" />
+                        <Label fx:id="surnameVerificator" layoutX="18.0" layoutY="187.0" styleClass="verificator" />
+                        <Label fx:id="countryVerificator" layoutX="20.0" layoutY="256.0" styleClass="verificator" />
+                        <Label fx:id="passportVerificator" layoutX="19.0" layoutY="327.0" styleClass="verificator" />
+                        <Label fx:id="DOBVerificator" layoutX="19.0" layoutY="396.0" styleClass="verificator" />
                      </children>
                   </Pane>
                   <Pane fx:id="signInPage" prefHeight="200.0" prefWidth="200.0" styleClass="centerPane">
                      <children>
-                        <TextField layoutX="28.0" layoutY="159.0" prefHeight="45.0" prefWidth="380.0" promptText="ID" />
-                        <PasswordField layoutX="28.0" layoutY="235.0" prefHeight="45.0" prefWidth="380.0" promptText="Password" />
-                        <Button fx:id="buttonSignIn" layoutX="301.0" layoutY="324.0" mnemonicParsing="false" onAction="#signIn" prefHeight="50.0" prefWidth="110.0" text="Sign In" textFill="#fcfcfc" />
-                        <Button fx:id="buttonRegister" layoutX="21.0" layoutY="441.0" mnemonicParsing="false" onAction="#registrationProcess" prefHeight="45.0" prefWidth="390.0" text="No account? Register!" textFill="#fcfcfc" />
+                        <TextField fx:id="user_ID" layoutX="28.0" layoutY="159.0" prefHeight="45.0" prefWidth="380.0" promptText="ID" />
+                        <PasswordField fx:id="user_password" layoutX="28.0" layoutY="235.0" prefHeight="45.0" prefWidth="380.0" promptText="Password" />
+                        <Button fx:id="buttonSignIn" layoutX="301.0" layoutY="324.0" mnemonicParsing="false" onAction="#signIn" prefHeight="50.0" prefWidth="110.0" text="Sign In" />
+                        <Button fx:id="buttonRegister" layoutX="21.0" layoutY="441.0" mnemonicParsing="false" onAction="#registrationProcess" prefHeight="45.0" prefWidth="390.0" text="No account? Register!" />
                         <Hyperlink fx:id="forgotPassword" layoutX="28.0" layoutY="336.0" onAction="#forgotPasswordProcedure" text="Forgot password?" />
-                        <Text fx:id="signInText" layoutX="36.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="signInText" text="Sign In" />
+                        <Label fx:id="pageIndicator" layoutX="36.0" layoutY="92.0" styleClass="signInText" text="Sign In" />
+                        <Label fx:id="idFilledStatusVerificator" layoutX="18.0" layoutY="204.0" styleClass="verificator" />
+                        <Label fx:id="profileVerificator" layoutX="20.0" layoutY="301.0" styleClass="verificator" />
+                        <Label fx:id="passwordFilledStatusVerificator" layoutX="20.0" layoutY="280.0" styleClass="verificator" />
                      </children>
                   </Pane>
                </children>
